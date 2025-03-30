@@ -16,8 +16,8 @@ npm install
 ```
 
 #### Step 2: Create the Component Files
-- 1. Create src/Login.jsx:
-```groovy
+1. Create `src/Login.jsx`:
+```js
 import { useState } from "react";
 
 export default function Login({ onLogin }) {
@@ -151,8 +151,8 @@ export default function Login({ onLogin }) {
   );
 }
 ```
-- 2. Replace src/App.jsx with:
-```groovy
+2. Replace `src/App.jsx` with:
+```js
 import { useState } from "react";
 import Login from "./Login";
 
@@ -272,12 +272,12 @@ export default function App() {
   );
 }
 ```
-- 3. Clean up the following unnecessary files:
-  - src/App.css
-  - src/index.css
-  - src/assets/react.svg
-- 4. Update src/main.jsx:
-```groovy
+3. Clean up the following unnecessary files:
+- `src/App.css`
+- `src/index.css`
+- `src/assets/react.svg`
+4. Update `src/main.jsx`:
+```js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
