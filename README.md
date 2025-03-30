@@ -299,7 +299,21 @@ npm run dev
 
 ---
 
-### Dockerfile
+### Setup the Github and Docker Repositories
+
+#### Push the local React Vite Project to Github
+- This can be done easily using Visual Studio Code's version control menu
+- Create a new public Github repository as follows: naghul-pranav/Final-Devops-Project
+
+#### Create a new Docker Repository
+- Go to hub.docker.com
+- Login with the credentials
+- Click on Create a Repository -> Name it as final-devops-project -> Set the visibility as public -> Click on create
+
+#### Add Dockerfile and Jenkinsfile in Github Repository
+Now come back to the Github Repository to add the following files, then commit the changes
+
+- Dockerfile:
 ```groovy
 # Use an official Node.js image to build the React app
 FROM node:18 as build
@@ -318,20 +332,20 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-### Jenkinsfile
+- Jenkinsfile:
 ```groovy
 pipeline {
     agent any
 
     environment {
         DOCKER_CREDENTIALS_ID = 'docker-seccred'
-        DOCKER_HUB_REPO = 'sanjai4334/guvi-devops-final-project'
+        DOCKER_HUB_REPO = 'naghulpranavkk/final-devops-project'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/sanjai4334/guvi-devops-final-project.git', branch: 'main'
+                git url: 'https://github.com/naghul-pranav/Devops-Final-Project.git', branch: 'main'
             }
         }
 
@@ -374,16 +388,17 @@ pipeline {
 }
 ```
 
- - Add these into the main repo folder and commit the changes
+___
 
-## Install these plugins 
- - ✅ Pipeline (Already included in newer Jenkins versions)
- - ✅ Git Plugin (For cloning repositories)
- - ✅ Docker Pipeline Plugin (For building & pushing Docker images)
- - ✅ Kubernetes Plugin (For deploying to Minikube)
- - ✅ Credentials Binding Plugin (For securely handling Docker Hub credentials)
+### Jenkins Plugins Setup
+Go to localhost:8080 -> Manage Jenkins -> Plugins -> Available Plugins and check whether following plugins are available
+- ✅ Pipeline (Already included in newer Jenkins versions)
+- ✅ Git Plugin (For cloning repositories)
+- ✅ Docker Pipeline Plugin (For building & pushing Docker images)
+- ✅ Kubernetes Plugin (For deploying to Minikube)
+- ✅ Credentials Binding Plugin (For securely handling Docker Hub credentials)
 
-## Create a pipeline job to push the docker image to dockerhub
+### Create a Pipeline job in Jenkins to push the Docker Image to Dockerhub from Github
  - Open Jenkins and create a pipeline job
  - In the connfigure section : 
     - In General section select `Discard old Builds` and set days to keep build and no of builds to keep as `2`
