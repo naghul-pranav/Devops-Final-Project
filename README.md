@@ -10,7 +10,7 @@
 ### Creating a React Vite Project with Pet Adoption Platform
 
 #### Step 1: Create the Vite Project
-- Open yout terminal and run:
+- Open your terminal and run:
 ```bash
 npm create vite@latest pet-adoption-platform -- --template react
 cd pet-adoption-platform
