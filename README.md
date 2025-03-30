@@ -12,7 +12,7 @@
 #### Step 1: Create the Vite Project
 - Open yout terminal and run:
 ```bash
-npm create vite@latest pet-adoption-platform --template react
+npm create vite@latest pet-adoption-platform -- --template react
 cd pet-adoption-platform
 npm install
 ```
