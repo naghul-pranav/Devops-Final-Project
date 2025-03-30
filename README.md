@@ -5,6 +5,8 @@
 > [!NOTE]  
 > Make sure to change all the credentials and links to your own in all the files and commands.
 
+---
+
 ### Creating a React Vite Project with Pet Adoption Platform
 
 #### Step 1: Create the Vite Project
@@ -288,11 +290,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>,
 );
 ```
+
 #### Step 3: Run the Project
 - Start the development server:
 ```bash
 npm run dev
 ```
+
+---
 
 ### Dockerfile
 ```groovy
