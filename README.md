@@ -302,18 +302,20 @@ npm run dev
 ### Setup the Github and Docker Repositories
 
 #### Push the local React Vite Project to Github
-- This can be done easily using Visual Studio Code's version control menu
-- Create a new public Github repository as follows: naghul-pranav/Final-Devops-Project
+- Open the project directory using `Visual Studio Code`
+- Click on `Version Control` icon in the Sidebar
+- Click on `Create a new Github repository`
+- Name is as `Devops-Final-Project` and save it as a `Public repository`
 
 #### Create a new Docker Repository
-- Go to hub.docker.com
+- Go to `hub.docker.com`
 - Login with the credentials
-- Click on Create a Repository -> Name it as final-devops-project -> Set the visibility as public -> Click on create
+- Click on `Create a Repository` -> Name it as `devops-final-project` -> Set the visibility as `public` -> Click on `create`
 
-#### Add Dockerfile and Jenkinsfile in Github Repository
-Now come back to the Github Repository to add the following files, then commit the changes
+#### Add `Dockerfile` and `Jenkinsfile` in Github Repository
+Now come back to the `Github` Repository to add the following files, then commit the changes
 
-- Dockerfile:
+- `Dockerfile`:
 ```groovy
 # Use an official Node.js image to build the React app
 FROM node:18 as build
@@ -332,14 +334,14 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-- Jenkinsfile:
+- `Jenkinsfile`:
 ```groovy
 pipeline {
     agent any
 
     environment {
         DOCKER_CREDENTIALS_ID = 'docker-seccred'
-        DOCKER_HUB_REPO = 'naghulpranavkk/final-devops-project'
+        DOCKER_HUB_REPO = 'naghulpranavkk/devops-final-project'
     }
 
     stages {
@@ -388,35 +390,68 @@ pipeline {
 }
 ```
 
-___
+---
 
 ### Jenkins Plugins Setup
-Go to localhost:8080 -> Manage Jenkins -> Plugins -> Available Plugins and check whether following plugins are available
-- ✅ Pipeline (Already included in newer Jenkins versions)
-- ✅ Git Plugin (For cloning repositories)
-- ✅ Docker Pipeline Plugin (For building & pushing Docker images)
-- ✅ Kubernetes Plugin (For deploying to Minikube)
-- ✅ Credentials Binding Plugin (For securely handling Docker Hub credentials)
+Go to `localhost:8080` -> `Manage Jenkins` -> `Plugins` -> `Available Plugins` and check whether following plugins are available
+- ✅ `Pipeline` (Already included in newer Jenkins versions)
+- ✅ `Git Plugin` (For cloning repositories)
+- ✅ `Docker Pipeline Plugin` (For building & pushing Docker images)
+- ✅ `Kubernetes Plugin` (For deploying to Minikube)
+- ✅ `Credentials Binding Plugin` (For securely handling Docker Hub credentials)
+
+---
 
 ### Create a Pipeline job in Jenkins to push the Docker Image to Dockerhub from Github
- - Open Jenkins and create a pipeline job
- - In the connfigure section : 
-    - In General section select `Discard old Builds` and set days to keep build and no of builds to keep as `2`
- - Scroll down to `Pipeline` section :
-    - Select `Pipeline script from SCM`
-    - In `SCM` select `git` and paste your `Repository URL` and change the branch to `main`
- - Click Save and then Build
+- Open Jenkins and create a Pipeline job -> Name it as `pipelinefinal`
+- In the `General` section : 
+  - Select `Discard old Builds` and set days to keep build and maximum no of builds to keep as `2`
+- Scroll down to `Pipeline` section :
+  - Select `Pipeline script from SCM`
+  - In `SCM` select the option `git` and paste your `Repository URL` and change the branch to `main`
+- Click `Save` and then `Build`
 
-![image](https://github.com/user-attachments/assets/875a758f-d546-4663-be6e-40e7ff6a1e02)
+![Screenshot from 2025-03-30 20-03-08](https://github.com/user-attachments/assets/f70fe838-8fb9-44ab-8182-e1fea4af0bfb)
 
-## Pull the image from Docker hub and run the build using Minikube
- - Open your terminal and execute the following commands
+![Screenshot from 2025-03-30 20-02-09](https://github.com/user-attachments/assets/35f818a1-338c-4dcd-978f-eb5897c3b205)
 
+---
+
+### Pull the image from Docker Hub and run the build using Minikube
+Open your terminal and execute the following commands
 ```bash
 minikube start
-kubectl create deployment guvi-devops-final --image=sanjai4334/guvi-devops-final-project:latest
-kubectl expose deployment guvi-devops-final --type=NodePort --port=80
-minikube service guvi-devops-final
 ```
+![Screenshot from 2025-03-30 21-43-27](https://github.com/user-attachments/assets/b2feeb7e-96ea-476b-a3c4-0fb62f4b8fa7)
 
-![image](https://github.com/user-attachments/assets/13abc9c0-38bb-48ac-8f19-6d43634bf387)
+```bash
+minikube status
+```
+![Screenshot from 2025-03-30 21-44-18](https://github.com/user-attachments/assets/9190351c-7b2a-4aae-975d-a19dd28118a8)
+
+```bash
+kubectl create deployment devops-final-project --image=naghulpranavkk/devops-final-project:latest
+```
+![Screenshot from 2025-03-30 21-46-27](https://github.com/user-attachments/assets/19aa040d-57bd-426a-92f4-ab9a5f0eb3b2)
+
+```bash
+kubectl expose deployment devops-final-project --type=NodePort --port=80
+```
+![Screenshot from 2025-03-30 21-46-53](https://github.com/user-attachments/assets/5bafecff-8a22-4513-8736-c4f9cd8a1df0)
+
+```bash
+kubectl get pods
+```
+![Screenshot from 2025-03-30 21-47-24](https://github.com/user-attachments/assets/1c993564-e1f9-4760-8586-302c3d2203d1)
+
+```bash
+minikube service devops-final-project
+```
+![Screenshot from 2025-03-30 21-48-45](https://github.com/user-attachments/assets/ae0fcd40-0ff5-4d6c-a7c0-d9883f150756)
+
+Now the `React Vite Project` will be opened in the `browser` 
+
+![Screenshot from 2025-03-30 20-23-49](https://github.com/user-attachments/assets/675786a4-04ea-412f-8b45-93a7dc724088)
+![Screenshot from 2025-03-30 20-24-02](https://github.com/user-attachments/assets/33837b12-808c-4f40-b648-5d3e12dc2139)
+![Screenshot from 2025-03-30 20-24-12](https://github.com/user-attachments/assets/0faa6bb6-01a6-4f19-9f67-2f3aad76f2f0)
+
